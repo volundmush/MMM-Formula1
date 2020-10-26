@@ -118,7 +118,6 @@ Module.register("MMM-Formula1",{
                 templateData.standings = templateData.standings.slice(0, this.config.maxRows);
             }
         }
-        console.log(templateData);
         return templateData;
     },
     validateConfig: function() {

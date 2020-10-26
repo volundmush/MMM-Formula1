@@ -262,13 +262,13 @@
   -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
 }
 
-.con.alpha-tauri { background-position: 0 0; }
-.con.ferarri { background-position: 0 -30px; }
-.con.haas { background-position: 0 -60px; }
-.con.mclaren { background-position: 0 -90px; }
-.con.mercedes { background-position: 0 -120px; }
-.con.racingpoint { background-position: 0 -150px; }
-.con.redbull { background-position: 0 -180px; }
-.con.renault { background-position: 0 -210px; }
-.con.williams_f1 { background-position: 0 -240px; }
-.con.alpha-romeo { background-position: 0 -270px; }
+.con.con-alpha-tauri { background-position: 0 0; }
+.con.con-ferarri { background-position: 0 -30px; }
+.con.con-haas { background-position: 0 -60px; }
+.con.con-mclaren { background-position: 0 -90px; }
+.con.con-mercedes { background-position: 0 -120px; }
+.con.con-racingpoint { background-position: 0 -150px; }
+.con.con-redbull { background-position: 0 -180px; }
+.con.con-renault { background-position: 0 -210px; }
+.con.con-williams_f1 { background-position: 0 -240px; }
+.con.con-alpha-romeo { background-position: 0 -270px; }
