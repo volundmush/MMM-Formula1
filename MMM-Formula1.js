@@ -45,6 +45,15 @@ Module.register("MMM-Formula1",{
         };
     },
 
+	// this is called when files are loaded
+	ready: function(obj) {
+    	obj.loaded_files = obj.loaded_files+1;
+    	if(obj.loaded_files === 2) {
+			obj.sendSocketNotification("CONFIG", obj.config);
+			obj.launched = true;
+		}
+	},
+
     // Subclass start method.
     start: function() {
         Log.info("Starting module: " + this.name);
@@ -54,12 +63,27 @@ Module.register("MMM-Formula1",{
         this.addFilters();
         // Load nationalities & start polling
         var self = this;
-        this.loadNationalities(function(response) {
+        this.loaded_files = 0;
+        this.launched = false;
+        this.getJson(function(response) {
             // Parse JSON string into object
             self.nationalities = JSON.parse(response);
+            self.nation_map = {};
+			for(var i = 0, len = self.nationalities.length; i < len; i++) {
+				self.nation_map[self.nationalities[i].demonym] = self.nationalities[i];
+			}
             // Start helper and data polling
-            self.sendSocketNotification("CONFIG", self.config);
-        });
+            self.ready(self);
+        }, "nationalities.json");
+        this.getJson(function(response) {
+			self.constructors = JSON.parse(response);
+			self.con_map = {};
+			for(var i = 0, len = self.constructors.length; i < len; i++) {
+				self.con_map[self.constructors[i].name] = self.constructors[i];
+			}
+			// Start helper and data polling
+			self.ready(self);
+		}, "constructors.json");
     },
     // Subclass socketNotificationReceived method.
     socketNotificationReceived: function(notification, payload) {
@@ -94,6 +118,7 @@ Module.register("MMM-Formula1",{
                 templateData.standings = templateData.standings.slice(0, this.config.maxRows);
             }
         }
+        console.log(templateData);
         return templateData;
     },
     validateConfig: function() {
@@ -106,6 +131,7 @@ Module.register("MMM-Formula1",{
     addFilters() {
         var env = this.nunjucksEnvironment();
         env.addFilter("getCodeFromNationality", this.getCodeFromNationality.bind(this));
+		env.addFilter("getCodeFromConstructors", this.getCodeFromConstructors.bind(this));
         env.addFilter("getFadeOpacity", this.getFadeOpacity.bind(this));
     },
     getFadeOpacity: function(index, itemCount) {
@@ -118,16 +144,22 @@ Module.register("MMM-Formula1",{
         }
     },
     getCodeFromNationality: function(nationality) {
-        for(var i = 0, len = this.nationalities.length; i < len; i++) {
-            if (this.nationalities[i].demonym === nationality) {
-                return this.nationalities[i].code.toLowerCase();
-            }
-        }
+        var results = this.nation_map[nationality];
+    	if(results) {
+        	return results.code.toLowerCase();
+		}
         return "";
     },
-    loadNationalities(callback) {
+	getCodeFromConstructors: function(con) {
+		var results = this.con_map[con];
+		if(results) {
+			return results.code.toLowerCase();
+		}
+		return "";
+	},
+    getJson(callback, filename) {
         var xobj = new XMLHttpRequest();
-        var path = this.file("nationalities.json");
+        var path = this.file(filename);
         xobj.overrideMimeType("application/json");
         xobj.open("GET", path, true);
         xobj.onreadystatechange = function() {

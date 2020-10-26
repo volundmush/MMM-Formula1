@@ -1,0 +1,12 @@
+[
+	{"name": "Alpha-Tauri", "code": "alpha-tauri"},
+	{"name": "Ferrari", "code": "ferrari"},
+	{"name": "Haas", "code": "haas"},
+	{"name": "McLaren", "code": "mclaren"},
+	{"name": "Mercedes", "code" : "mercedes"},
+	{"name": "Racing Point", "code": "racingpoint"},
+	{"name": "Red Bull", "code" : "redbull"},
+	{"name": "Renault", "code": "renault"},
+	{"name": "Williams_F1", "code": "williams_f1"},
+	{"name": "Alpha-Romeo", "code": "alpha-romeo"}
+]

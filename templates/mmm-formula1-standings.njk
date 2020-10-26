@@ -15,6 +15,9 @@
                 <td>{{ "DRIVER" | translate }}</td>
                 {% endif %}
                 <td>{{ "CONSTRUCTOR" | translate }}</td>
+                <td class="symbol bright">
+                    <div class="logo F1"></div>
+                </td>
                 <td class="light symbol align-right stat"><span class="fa fa-line-chart"></span></td>
                 <td class="light symbol align-right stat"><span class="fa fa-trophy"></span></td>
             </tr>
@@ -28,6 +31,11 @@
                 </td>
                 <td class="title bright">{{ standing.Driver.givenName }} {{ standing.Driver.familyName }}</td>
                 <td class="title light">{{ standing.Constructors | join (",", "name") }}</td>
+                <td class="symbol bright">
+                  {% for con in standing.Constructors %}
+                  <div class="con con-{{ con.name | getCodeFromConstructors }}{{ " grayscale" if config.grayscale }}"></div>
+                  {% endfor %}
+                </td>
                 {% else %}
                 <td class="symbol">
                     <div class="flag flag-{{ standing.Constructor.nationality | getCodeFromNationality }}{{ " grayscale" if config.grayscale }}"></div>

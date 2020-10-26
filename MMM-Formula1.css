@@ -245,3 +245,30 @@
 .flag.flag-za { background-position: -160px -224px; }
 .flag.flag-zm { background-position: -176px -224px; }
 .flag.flag-zw { background-position: -192px -224px; }
+
+
+/* Flag Sprites - https://www.flag-sprites.com/en_US/ */
+.MMM-Formula1 .con {
+  width: 20px;
+  height: 30px;
+  background: url(cons.png) no-repeat;
+  border: 0;
+  opacity: 0.6;
+}
+
+.MMM-Formula1 .con.grayscale {
+  filter: gray; /* IE6-9 */
+  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
+.con.alpha-tauri { background-position: 0 0; }
+.con.ferarri { background-position: 0 -30px; }
+.con.haas { background-position: 0 -60px; }
+.con.mclaren { background-position: 0 -90px; }
+.con.mercedes { background-position: 0 -120px; }
+.con.racingpoint { background-position: 0 -150px; }
+.con.redbull { background-position: 0 -180px; }
+.con.renault { background-position: 0 -210px; }
+.con.williams_f1 { background-position: 0 -240px; }
+.con.alpha-romeo { background-position: 0 -270px; }
